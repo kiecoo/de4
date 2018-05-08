@@ -1,5 +1,5 @@
 
-//Version v11-0-(way2)-----(CPS) foreach-rename
+//Version v11-0-(way2)-----(CPS) foreach-rename---add sign-in
 <!doctype html>	
 	<html>
 	  <head>
@@ -128,6 +128,18 @@
 	    padding:.1px;
 	  }
 	`
+	
+	
+	    var makeSignupButton = require('./index.js')  
+   
+     // makeSignupButton   
+       var GITHUB_CLIENT_ID = '62483029222d02636782'
+    
+	var button = makeSignupButton(GITHUB_CLIENT_ID)
+	document.body.appendChild(button)
+		    
+	// profile
+	
 	function profile (fx_done) {
 	   getGithubData (next)
            function next (x_data) {
