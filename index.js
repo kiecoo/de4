@@ -19,3 +19,4 @@ function makeSigninButton (GITHUB_CLIENT_ID) {
   }
   return signupButton
 }
+
