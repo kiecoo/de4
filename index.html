@@ -193,14 +193,15 @@
           var el = getGithubData (next)	
 	  fx_done(el)
         }
-        function loadData (error, data) {
+	     
+        //function loadData (error, data) {
           //if (error) return console.error(error)
-          console.log(`github sent us lots of data, so lets use it to build the page :-)`)
-          document.body.innerHTML = '' // to clear and remove the signup button
-          var el = next(data)  
-          fx_done(el)          
-        }
-	      
+          //console.log(`github sent us lots of data, so lets use it to build the page :-)`)
+          //document.body.innerHTML = '' // to clear and remove the signup button
+          //var el = next(data)  
+          //fx_done(el)          
+        //}
+	     
         function next (x_data,done) {
           done(bel`<div>${x_data.map(putEl)}</div>`)
           function done (el) { document.body.appendChild(el) }
