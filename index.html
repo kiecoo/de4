@@ -1,5 +1,5 @@
-//test: add loadData (debug from A1-1)
-// Use function loadData  (data, error) instead  function loadData (error, data)
+//test: add loadData (debug from A1-2)
+// Use  function done (el, error) instead  function done
 <!doctype html>
 <html>
   <head>
@@ -283,7 +283,7 @@
 	    	    
       profile(done)
       // function done (el) { document.body.appendChild(el) }          
-      function done (error, el) {
+      function done (el, error) {
         if (error) return console.error(error) // or `document.body.innerHTML = `<h1>${error}</h1>`
         document.body.appendChild(el)
       }
