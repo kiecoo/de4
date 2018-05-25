@@ -1,4 +1,4 @@
-// (debug from A1)debug1 getGithubData(data => loadData(null, data)) 
+// (debug from A1)debug2 el is undefined-by profile(data => done(null, data)) 
 <!doctype html>
 <html>
   <head>
@@ -280,7 +280,7 @@
 	fy_next(data1)
       }	    
 	    	    
-      profile(done)
+      profile(data => done(null, data)) 
       // function done (el) { document.body.appendChild(el) }          
       function done (error, el) {
         if (error) return console.error(error) // or `document.body.innerHTML = `<h1>${error}</h1>`
