@@ -1,4 +1,4 @@
-//reback (debug from A1)test: add loadData)no change order of `error`
+// (debug from A1)debug1 getGithubData(data => loadData(null, data)) 
 <!doctype html>
 <html>
   <head>
@@ -192,7 +192,7 @@
           console.log(`github responded with "${code}", so let's fetch a lot of data :-)`)
           //var el = getGithubData (next)	
 	  //fx_done(el)
-	  getGithubData(loadData)	
+	  getGithubData(data => loadData(null, data)) 	
         }
 	     
         function loadData (error, data) {
