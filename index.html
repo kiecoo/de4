@@ -1,4 +1,4 @@
-// test: step5-2 add DATA-from-github(debug 5-2-2 name)   
+// [reback] test: (debug 5-2 add url)step5add DATA-from-github
 <!doctype html>
 <html>
   <head>
@@ -211,7 +211,7 @@
           //x_data.forEach(putEl)
           function putEl(y_data) {
             var username = y_data.username
-            var name     = y_data.name
+            var name     = y_data.username
             var cardText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostru '
             var imageUrl = 'https://nomadlist.com/assets/img/cities/phuket-thailand-500px.jpg'
             var city     = 'Berlin'
@@ -288,19 +288,15 @@
         DATA from get-userprofiles-from-github
       **************************************************************************/	    
       function getGithubData (callback) {
-
         minixhr(url, response)
-
         function response (json) {
           var userprofiles = localStorage['userprofiles']
           if (userprofiles) {
             return callback(JSON.parse(userprofiles))
           }
-
           var allusers = JSON.parse(json)
           // console.info(allusers)
           var userprofiles = []
-
           allusers.forEach(function (nameEach) {
             var reponame = nameEach.full_name
             var repoURL = 'https://api.github.com/repos/' + reponame
@@ -309,11 +305,9 @@
           function response2 (data) {
             var obj = JSON.parse(data)
             var repoFilesAndFoldersURL = obj.branches_url.replace('{/branch}', '/' + obj.default_branch)
-
             minixhr(repoFilesAndFoldersURL, function (data) {
               var obj = JSON.parse(data)
               var filesAndFoldersURL = obj.commit.commit.tree.url
-
               minixhr(filesAndFoldersURL, function (data) {
                 var obj = JSON.parse(data)
                 obj.tree.forEach(function (file) {
@@ -327,13 +321,11 @@
                       } catch (error) {
                         profile = { name: 'error', url: configJsonURL }
                       }
-
                       userprofiles.push(profile)
                       if (allusers.length == userprofiles.length) {
                         localStorage['userprofiles'] = JSON.stringify(userprofiles)
                         callback(userprofiles)
                       }
-
                     })
                   }
                 })
