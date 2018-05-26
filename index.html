@@ -1,4 +1,4 @@
-// test: step5 add act-[debug1]-add minixhr   
+// test: step5-2 add DATA from get-userprofiles-from-github   
 <!doctype html>
 <html>
   <head>
@@ -284,71 +284,63 @@
       **************************************************************************/
   	
       /**************************************************************************
-        DATA from get-github-activity-feed
+        DATA from get-userprofiles-from-github
       **************************************************************************/	    
       function getGithubData (callback) {
-        var url = 'https://api.github.com/repos/wizardamigos/profiles/forks'
-        var results = []
-        var allusers
-        minixhr(makeURL(url), data => response(data, url))
+
+        minixhr(url, response)
 
         function response (json) {
-          allusers = getData(url, json)
+          var userprofiles = localStorage['userprofiles']
+          if (userprofiles) {
+            return callback(JSON.parse(userprofiles))
+          }
+
+          var allusers = JSON.parse(json)
+          // console.info(allusers)
+          var userprofiles = []
+
           allusers.forEach(function (nameEach) {
-            var reponame = nameEach.owner.login
-            var repoURL = `https://api.github.com/users/${reponame}/events/public`
-            minixhr(makeURL(repoURL), data => response2(data, repoURL))
-          })
-        }
+            var reponame = nameEach.full_name
+            var repoURL = 'https://api.github.com/repos/' + reponame
+            minixhr(repoURL, response2)
+           })
+          function response2 (data) {
+            var obj = JSON.parse(data)
+            var repoFilesAndFoldersURL = obj.branches_url.replace('{/branch}', '/' + obj.default_branch)
 
-        function response2 (json, url) {
-          var userPublishActivity = getData(url, json)
-          var activities = userPublishActivity.map(x => ({
-            repo: x.repo.name,
-            url: x.repo.url,
-            name: x.actor.login,
-            time: x.created_at
-          }))
-          results.push(activities)
-          if (allusers.length === results.length) callback(results)
-          // userPublishActivity.forEach(function (activityDetail) {
-          //   var repoActivity = activityDetail.repo.name
-          //   var repoActiveURL = `https://github.com/${repoActivity}`
-          //   minixhr(makeURL(repoActiveURL), data => response3(data, repoActiveURL))
-          // })
-        }
+            minixhr(repoFilesAndFoldersURL, function (data) {
+              var obj = JSON.parse(data)
+              var filesAndFoldersURL = obj.commit.commit.tree.url
 
-        // function response3 (json, url) {
-        //   var userProjectCreateDate = getData(url, json)
-        //   userProjectCreateDate.forEach(function (projectCreateDate) {
-        //     var repoCreateDate = projectCreateDate.created_at
-        //     results.push(repoCreateDate)
-        //     if (allusers.length === results.length) callback(results)
-        //   })
-        // }
+              minixhr(filesAndFoldersURL, function (data) {
+                var obj = JSON.parse(data)
+                obj.tree.forEach(function (file) {
+                  if (file.path === 'config.json') {
+                    var configJsonURL = file.url
+                    minixhr(configJsonURL, function (data) {
+                      try {
+                        var obj = JSON.parse(data)
+                        var json = atob(obj.content)
+                        var profile = JSON.parse(json)
+                      } catch (error) {
+                        profile = { name: 'error', url: configJsonURL }
+                      }
 
-      function getData (url, json) {
-        try {
-          var data = JSON.parse(json)
-          updateCache(url, data)
-        } catch (e) {
-          data = getResponseFromCache(url)
+                      userprofiles.push(profile)
+                      if (allusers.length == userprofiles.length) {
+                        localStorage['userprofiles'] = JSON.stringify(userprofiles)
+                        callback(userprofiles)
+                      }
+
+                    })
+                  }
+                })
+              })
+            })
+          }
         }
-        return data
-      }
-      function getResponseFromCache (url) {
-        console.error('TOO MANY REQUESTS (fallback to cached activities)')
-        return JSON.parse(window.localStorage[url])
-      }
-      function updateCache (url, data) {
-        window.localStorage[url] = JSON.stringify(data)
-      }
-        function makeURL (url) {
-          // return url
-          return 'https://cors-anywhere.herokuapp.com/' + url
-        }
-      }	    	
-	    
+      }    
       /**************************************************************************
         PRINT LIST OF CARDS
       **************************************************************************/	    
