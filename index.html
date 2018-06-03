@@ -1,4 +1,4 @@
-// test: step 6 access token(debug6-3)getGithubData(data.token, data => loadData(null, data))
+// test: step 6 access token(debug6-4)move getGithubData(data.token..)
 <!doctype html>
 <html>
   <head>
@@ -196,11 +196,13 @@
           minixhr(`https://get-profiles.herokuapp.com/${code}`, function (json) {
             var data = JSON.parse(json)
             console.log(data.token)
+		  
+	    getGithubData(data.token, data => loadData(null, data))	  
           })
 		
           //var el = getGithubData (next)	
 	  //fx_done(el)
-          getGithubData(data.token, data => loadData(null, data))
+          
         }
 	     
         function loadData (error, data) {
