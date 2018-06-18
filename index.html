@@ -193,7 +193,7 @@
           console.log(`github responded with "${code}", so let's fetch a lot of data :-)`)
 	  
 	  //access token	
-          minixhr(`https://get-profiles.herokuapp.com/${code}`, function (json, response, xhr, header) {
+          minixhr(`https://kiecoo.github.io/de4/${code}`, function (json, response, xhr, header) {
 	    console.log(header)	  
             var data = JSON.parse(json)
             console.log(data.token)
