@@ -1,4 +1,4 @@
-// deTest2:change GITHUB_CLIENT_ID & heroku url
+// deTest3:change api url: https://de4-getdata-heroku.herokuapp.com/authenticate/${code}`
 <html>
   <head>
     <meta charset="utf-8">
@@ -192,7 +192,7 @@
           console.log(`github responded with "${code}", so let's fetch a lot of data :-)`)
 	  
 	  //access token	
-          minixhr(`https://de4-getdata-heroku.herokuapp.com/${code}`, function (json, response, xhr, header) {
+          minixhr(`https://de4-getdata-heroku.herokuapp.com/authenticate/${code}`, function (json, response, xhr, header) {
 	    console.log(header)	  
             var data = JSON.parse(json)
             console.log(data.token)
