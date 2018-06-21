@@ -1,4 +1,4 @@
-// deTest5:change api url:authenticate/'+code, function (json, response, xhr, header) {}
+//goback deTest3:change api url:/authenticate/${code}`, function (json, response, xhr, header) {
 <html>
   <head>
     <meta charset="utf-8">
@@ -203,7 +203,7 @@
 	    getGithubData(data.token, data => loadData(null, data))	  
           })
 	  ******************************************************************************/
-	  minixhr('https://de4-getdata-heroku.herokuapp.com/authenticate/'+code, function (json, response, xhr, header) {
+	  minixhr(`https://de4-getdata-heroku.herokuapp.com/authenticate/${code}`, function (json, response, xhr, header) {
             console.log(header)
 	    var data = JSON.parse(json)
             console.log(data.token)
