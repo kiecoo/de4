@@ -1,4 +1,4 @@
-// debug1 of deTest6---add Access-Control-Allow-Origin' (based deTest5-debug1})already)
+// debug2 of deTest6---remove minixhr of function loadCode
 <html>
   <head>
     <meta charset="utf-8">
@@ -191,8 +191,8 @@
           //if (error) return console.error(error)
           console.log(`github responded with "${code}", so let's fetch a lot of data :-)`)
 		
-	  minixhr({ url: "https://de4-getdata-heroku.herokuapp.com", header: { 'Access-Control-Allow-Origin': '*' }}, data => console.log(data)
-	  )
+	 // minixhr({ url: "https://de4-getdata-heroku.herokuapp.com", header: { 'Access-Control-Allow-Origin': '*' }}, data => console.log(data)
+	  //)
           //access token
 	  /******************************************************************************
 	  <<  the old version of access token  >>
