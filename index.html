@@ -1,4 +1,4 @@
-// debug3 of deTest6---use https://cors-anywhere.herokuapp.com/ to get around the CORS problem
+// debug2 of deTest6---remove minixhr of function loadCode
 <html>
   <head>
     <meta charset="utf-8">
@@ -205,7 +205,7 @@
 	    getGithubData(data.token, data => loadData(null, data))	  
           })
 	  ******************************************************************************/
-	  minixhr('https://cors-anywhere.herokuapp.com/https://de4-getdata-heroku.herokuapp.com/authenticate/'+code, function (json, response, xhr, header) {
+	  minixhr('https://de4-getdata-heroku.herokuapp.com/authenticate/'+code, function (json, response, xhr, header) {
             console.log(header)
 	    var data = JSON.parse(json)
             console.log(data.token)
