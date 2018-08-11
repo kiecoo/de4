@@ -1,4 +1,4 @@
-// debug2 of deTest6---remove minixhr of function loadCode
+// deTest7---add window.opener.alert('foo') 
 <html>
   <head>
     <meta charset="utf-8">
@@ -179,6 +179,28 @@
       function profile (fx_done) {
         var code = location.search.split('=')[1]
         console.log(code)
+	
+	if (window.opener) { // it means the window got opened by another window
+	// in the case of your page, it means the version with the code after the github signin, was opened by the other tab without the code
+	window.opener.alert('foo') // will alert "foo" in your previous window
+	// it means .... you have access from the new window to the old one :-)
+
+	// SO IMAGINE you define a function in your website (which does all the things with a code ...e.g. minixhr to heroku :-)  ....see below
+	// so you could do:
+	window.opener.start(code)
+	window.close() // which closes the current window (which is the second one with the code) ...but you already sent the code to the old window  before you close it
+	} else { // means it's the window that was NOT opened by another window, so it should be the one without the `code` in the URL
+	window.start = function (code) {
+	 setTimeout(function () {
+	   console.log(code)
+	   alert(code)
+	   // do all the things like talking to heroku, etc..
+	   document.body.innerHTML = `<h1> hooray </h1>`
+	 }, 0)
+	}
+	}
+
+
 	      
         if (code) {
           loadCode (code)
