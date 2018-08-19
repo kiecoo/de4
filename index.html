@@ -1,4 +1,4 @@
-// deTest8-step1---use x instead hooray
+// deTest8-step1-1---use function=x instead hooray
 <html>
   <head>
     <meta charset="utf-8">
@@ -176,7 +176,11 @@
       /******************************************************************************
         SIGNUP BUTTON
       ******************************************************************************/
-      var x = `<h1> hooray </h1>`
+      var x = function hooray()
+      function hooray(){
+	var el = `<h1> hooray </h1>`
+      	return el
+      }
       function profile (fx_done) {
         var code = location.search.split('=')[1]
         console.log(code)
