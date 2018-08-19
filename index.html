@@ -1,4 +1,4 @@
-// deTest7---add window.opener.alert('foo') 
+// deTest8-step1---use x instead hooray
 <html>
   <head>
     <meta charset="utf-8">
@@ -176,6 +176,7 @@
       /******************************************************************************
         SIGNUP BUTTON
       ******************************************************************************/
+      var x = `<h1> hooray </h1>`
       function profile (fx_done) {
         var code = location.search.split('=')[1]
         console.log(code)
@@ -195,11 +196,12 @@
 	   console.log(code)
 	   alert(code)
 	   // do all the things like talking to heroku, etc..
-	   document.body.innerHTML = `<h1> hooray </h1>`
+	   document.body.innerHTML = x
 	 }, 0)
 	}
 	}
 
+	
 
 	      
         if (code) {
