@@ -1,5 +1,7 @@
-	module.exports = makeGitterChat
-  function makeGitterChat () {
+        var makeLinkUrl = require('./make-gitter-url.js')  
+	
+        module.exports = makeGitterChat
+        function makeGitterChat () {
 	  var name              = 'Nina'
 	  var username          = 'ninabreznik'
 	  var cardText          = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostru '
@@ -8,9 +10,7 @@
 	  var twitter           = `https://twitter.com/${username}`
 	  var github            = `https://github.com/${username}`
 	  var codepen           = `https://codepen.io/${username}`
-	  function makeLinkUrl (username) {
-	    return  `https://gitter.im/${username}/~embed`
-	  }
+	  
 	// HTML
 	  var cardContainer = bel`
 	    <div class=${css.cardContainer}>
