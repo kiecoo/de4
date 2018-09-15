@@ -253,61 +253,7 @@
         FUNCTION NEXT:print each card //FUNCTION DONE(which is fx_done):list of cards 
         ******************************************************************************/     
         function next (x_data,done) {
-          done(bel`<div>${x_data.map(putEl)}</div>`)  
-	  //function done (el) { document.body.appendChild(el) }	
-          //x_data.forEach(putEl)
-          function putEl(y_data) {
-            var username = y_data.username
-            var name     = y_data.name
-            var cardText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostru '
-            var imageUrl = 'https://nomadlist.com/assets/img/cities/phuket-thailand-500px.jpg'
-            var city     = 'Berlin'
-            var twitter  = `https://twitter.com/${username}`
-            var github   = `https://github.com/${username}`
-            var codepen  = `https://codepen.io/${username}`
-            function makeLinkUrl (username) {
-              return  `https://gitter.im/${username}/~embed`
-            }
-            var cardContainer = bel`
-              <div class=${css.cardContainer}>
-                <img src=${imageUrl} class=${css.profileImage}>
-                <div class=${css.cardTitle}>${name}</div>
-                <div class=${css.cardSubtitle}>@${username}</div>
-              </div>`
-            var cardContainer_hover = bel`
-              <div class=${css.cardContainer_hover}>
-                <div class=${css.cardGitterChat} ><iframe class=${css.iframe} src=${ makeLinkUrl (username)}></iframe></div>
-                <div class=${css.cardSocial}>
-                  <a href=${twitter} target='_blank'>
-                    <i class="${css.cardSocial_fontawesome} fa fa-twitter" aria-hidden="true"></i>
-                  </a>
-                  <a href=${github} target='_blank'>
-                    <i class="${css.cardSocial_fontawesome} fa fa-github" aria-hidden="true"></i>
-                  </a>
-                  <a href=${codepen} target='_blank'>
-                    <i class="${css.cardSocial_fontawesome} fa fa-codepen" aria-hidden="true"></i>
-                  </a>
-                </div>
-                <div class=${css.cardText}>${cardText}</div>
-              </div>`
-            var el = bel`
-              <div class=${css.card} onmouseenter=${hoverCard} onmouseleave=${unhoverCard}>
-                ${cardContainer}
-              </div>`
-            /**************************************************************************
-              HELPERS
-            **************************************************************************/
-            function hoverCard (event) {
-              el.appendChild(cardContainer_hover)
-              el.removeChild(cardContainer)
-            }
-            function unhoverCard (event) {
-              el.removeChild(cardContainer_hover)
-              el.appendChild(cardContainer)
-            }
-            //  fx_done(el)
-            return el
-          }
+          done(bel`<div>${x_data.map(makeGitterChat)}</div>`)  
         }
       }
       /**************************************************************************
